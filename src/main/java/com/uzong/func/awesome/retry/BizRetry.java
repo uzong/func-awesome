@@ -4,9 +4,29 @@ import com.uzong.func.awesome.Callable;
 import lombok.SneakyThrows;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 
 public class BizRetry {
+
+
+    /**
+     * 重试函数，当发生异常时重试指定次数
+     */
+    public static <T, R> Function<T, R> retry(Function<T, R> f, int maxAttempts) {
+        return t -> {
+            RuntimeException lastException = null;
+            for (int i = 0; i < maxAttempts; i++) {
+                try {
+                    return f.apply(t);
+                } catch (RuntimeException e) {
+                    lastException = e;
+                }
+            }
+            assert lastException != null;
+            throw lastException;
+        };
+    }
 
     /**
      * 错误重试

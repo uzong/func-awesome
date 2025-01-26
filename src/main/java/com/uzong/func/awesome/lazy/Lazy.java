@@ -1,9 +1,4 @@
-package com.uzong.func.awesome.function;
-
-/**
- * @author sky
- * @since 2025/1/1
- */
+package com.uzong.func.awesome.lazy;
 
 import lombok.Getter;
 
@@ -18,7 +13,7 @@ public class Lazy<T> {
     private T value;
     /**
      * -- GETTER --
-     *  判断是否已经初始化
+     * 判断是否已经初始化
      */
     @Getter
     private boolean initialized = false;
